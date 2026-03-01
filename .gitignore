@@ -1,0 +1,4 @@
+# Ignore runtime/generated dataset outputs
+data/*
+!data/.gitkeep
+
