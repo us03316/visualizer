@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """
-Plot three trajectories side-by-side from recorded JSON files.
+Plot trajectories side-by-side from recorded JSON files.
 
-- Takes exactly 3 JSON files.
+Current mode:
+- Takes exactly 9 JSON files.
+- Input order:
+  diff-M,S,C, Concurrent-M,S,C, Proposed-M,S,C
+- Builds 3 panels (M, S, C), each overlaying 3 trajectories.
 - Uses only trajectory fields (amcl preferred, odom fallback by default).
 - Rotates coordinates by N degrees to align scene orientation.
 - Single shared y-axis on the left, separate x-axis per subplot.
@@ -18,6 +22,7 @@ from typing import List, Tuple
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
 
 # Default data directory (same pattern as existing plot_node)
@@ -74,6 +79,18 @@ def _extract_xy(data: dict, source: str) -> Tuple[np.ndarray, np.ndarray, str]:
     return x, y, selected_name
 
 
+def _extract_ref_xy(data: dict) -> Tuple[np.ndarray, np.ndarray]:
+    plan = data.get("fixed_global_plan")
+    if not plan:
+        return np.array([], dtype=float), np.array([], dtype=float)
+    poses = plan.get("poses") or []
+    if not poses:
+        return np.array([], dtype=float), np.array([], dtype=float)
+    px = np.array([p["x"] for p in poses], dtype=float)
+    py = np.array([p["y"] for p in poses], dtype=float)
+    return px, py
+
+
 def _rotate_xy(x: np.ndarray, y: np.ndarray, deg: float) -> Tuple[np.ndarray, np.ndarray]:
     rad = math.radians(deg)
     c = math.cos(rad)
@@ -89,14 +106,36 @@ def main() -> int:
     )
     parser.add_argument(
         "files",
-        nargs=3,
-        help="Exactly 3 JSON files. If relative name is given, data dir is searched.",
+        nargs=9,
+        help=(
+            "Exactly 9 JSON files in this order: "
+            "diff-M,S,C concurrent-M,S,C proposed-M,S,C. "
+            "If relative names are given, data dir is searched."
+        ),
     )
     parser.add_argument(
         "--rotate-deg",
         type=float,
         default=0.0,
-        help="Rotation angle in degrees (CCW positive).",
+        help="Global rotation angle in degrees (CCW positive).",
+    )
+    parser.add_argument(
+        "--rotate-deg-m",
+        type=float,
+        default=None,
+        help="Panel M rotation angle override (degrees).",
+    )
+    parser.add_argument(
+        "--rotate-deg-s",
+        type=float,
+        default=None,
+        help="Panel S rotation angle override (degrees).",
+    )
+    parser.add_argument(
+        "--rotate-deg-c",
+        type=float,
+        default=None,
+        help="Panel C rotation angle override (degrees).",
     )
     parser.add_argument(
         "--source",
@@ -122,40 +161,87 @@ def main() -> int:
         print(f"File resolve error: {exc}", file=sys.stderr)
         return 1
 
-    trajs: List[Tuple[np.ndarray, np.ndarray, str, str]] = []
+    panel_names = ["M", "S", "C"]
+    method_names = ["Diff", "Concurrent", "Proposed"]
+    method_colors = {
+        "Diff": "#7f7f7f",
+        "Concurrent": "#ff7f0e",
+        "Proposed": "#1f77b4",
+    }
+    legend_order = ["Ref", "Diff", "Concurrent", "Proposed"]
+    panel_rotate_deg = [
+        args.rotate_deg if args.rotate_deg_m is None else float(args.rotate_deg_m),
+        args.rotate_deg if args.rotate_deg_s is None else float(args.rotate_deg_s),
+        args.rotate_deg if args.rotate_deg_c is None else float(args.rotate_deg_c),
+    ]
+
+    # panel_data[panel_idx] = list of (x, y, ref_x, ref_y, method_label, color)
+    panel_data: List[List[Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, str, str]]] = [
+        [], [], []
+    ]
     try:
-        for p in paths:
+        for file_idx, p in enumerate(paths):
             data = _load_json(p)
             x, y, src_name = _extract_xy(data, args.source)
-            xr, yr = _rotate_xy(x, y, args.rotate_deg)
-            label = os.path.splitext(os.path.basename(p))[0]
-            trajs.append((xr, yr, src_name, label))
+            px, py = _extract_ref_xy(data)
+            method_idx = file_idx // 3
+            panel_idx = file_idx % 3
+            rotate_deg = panel_rotate_deg[panel_idx]
+            xr, yr = _rotate_xy(x, y, rotate_deg)
+            pxr, pyr = _rotate_xy(px, py, rotate_deg)
+            method = method_names[method_idx]
+            panel = panel_names[panel_idx]
+            panel_data[panel_idx].append((xr, yr, pxr, pyr, method, method_colors[method]))
     except Exception as exc:
         print(f"Load/parse error: {exc}", file=sys.stderr)
         return 1
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
 
-    y_min = min(float(np.nanmin(t[1])) for t in trajs)
-    y_max = max(float(np.nanmax(t[1])) for t in trajs)
-    y_pad = max(0.1, 0.05 * (y_max - y_min if y_max > y_min else 1.0))
+    legend_handles = {}
+    legend_handles["Ref"] = Line2D([0], [0], color="k", linestyle="--", linewidth=1.5)
 
-    for i, (ax, (x, y, src_name, label)) in enumerate(zip(axes, trajs)):
-        ax.plot(x, y, linewidth=2.0, color="#1f77b4")
-        ax.set_title(f"{label} ({src_name})", fontsize=10)
-        ax.set_xlabel("x (m)")
+    for i, (ax, panel_curves) in enumerate(zip(axes, panel_data)):
+        # Draw one ref per panel (from first curve that has ref)
+        for (x, y, px, py, legend_label, color) in panel_curves:
+            if px.size > 0 and py.size > 0:
+                ax.plot(px, py, "k--", linewidth=1.5, alpha=0.9, label="_nolegend_")
+                break
+
+        for (x, y, px, py, method_label, color) in panel_curves:
+            h, = ax.plot(x, y, linewidth=2.0, color=color, label=method_label)
+            legend_handles[method_label] = h
+
         ax.grid(True, alpha=0.3)
-        ax.set_aspect("equal", adjustable="box")
-        ax.set_ylim(y_min - y_pad, y_max + y_pad)
+        # Keep y-axis truly shared across panels.
+        ax.set_aspect("auto")
+        ax.set_xlim(-1.5, 2.0)
+        ax.set_ylim(-1.0, 5.0)
+        # Keep only axis lines (no full rectangular box around each subplot).
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        if i == 0:
+            ax.spines["left"].set_visible(True)
+        if i == 2:
+            ordered = [lbl for lbl in legend_order if lbl in legend_handles]
+            handles = [legend_handles[lbl] for lbl in ordered]
+            ax.legend(handles, ordered, loc="upper right", fontsize=8, frameon=False)
 
         if i == 0:
             ax.set_ylabel("y (m)")
         else:
+            ax.spines["left"].set_visible(False)
             ax.set_ylabel("")
             ax.tick_params(axis="y", which="both", left=False, labelleft=False)
 
-    fig.suptitle(f"Trajectories (rotation: {args.rotate_deg:.1f} deg)", fontsize=12)
-    fig.subplots_adjust(left=0.08, right=0.99, top=0.90, bottom=0.12, wspace=0.03)
+        # Keep x-axis label only at S panel (middle).
+        if i == 1:
+            ax.set_xlabel("x (m)", labelpad=4)
+        else:
+            ax.set_xlabel("")
+        ax.tick_params(axis="x", pad=5)
+
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.90, bottom=0.12, wspace=0.08)
 
     if args.output:
         out_path = args.output
