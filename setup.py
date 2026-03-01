@@ -28,6 +28,8 @@ setup(
             'caster_kinematic_estimator_node = visualizer.caster_kinematic_estimator:main',
             'key_stop_plot_node = visualizer.key_stop_plot:main',
             'trajectory_triptych = visualizer.trajectory_triptych:main',
+            'compare_metrics_table = visualizer.compare_metrics_table:main',
+            'pose_error_plot = visualizer.pose_error_plot:main',
         ],
     },
 )
