@@ -1,0 +1,6 @@
+[console_scripts]
+caster_kinematic_estimator_node = visualizer.caster_kinematic_estimator:main
+key_stop_plot_node = visualizer.key_stop_plot:main
+plot_node = visualizer.plot:main
+record_node = visualizer.record:main
+trajectory_triptych = visualizer.trajectory_triptych:main

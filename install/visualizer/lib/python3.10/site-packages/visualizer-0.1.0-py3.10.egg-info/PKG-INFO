@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: visualizer
+Version: 0.1.0
+Summary: Record and plot odometry, path, velocity, current, caster angles
+Maintainer: amr2
+Maintainer-email: amr2@todo.todo
+License: Apache-2.0
+Requires-Dist: setuptools
+Dynamic: license
+Dynamic: maintainer
+Dynamic: maintainer-email
+Dynamic: requires-dist
+Dynamic: summary

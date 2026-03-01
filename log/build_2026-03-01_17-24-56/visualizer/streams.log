@@ -1,0 +1,53 @@
+[0.290s] Invoking command in '/home/lee/ros2_ws/src/visualizer': CONDA_PROMPT_MODIFIER=(ros2) PYTHONPATH=/home/lee/ros2_ws/src/visualizer/build/visualizer/prefix_override:/home/lee/anaconda3/envs/ros2/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages:${PYTHONPATH} /home/lee/anaconda3/envs/ros2/bin/python3.10 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/visualizer build --build-base /home/lee/ros2_ws/src/visualizer/build/visualizer/build install --record /home/lee/ros2_ws/src/visualizer/build/visualizer/install.log --single-version-externally-managed install_data
+[0.360s] /home/lee/anaconda3/envs/ros2/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+[0.360s]   warnings.warn(msg)
+[0.396s] running egg_info
+[0.401s] creating build/visualizer/visualizer.egg-info
+[0.402s] writing build/visualizer/visualizer.egg-info/PKG-INFO
+[0.402s] writing dependency_links to build/visualizer/visualizer.egg-info/dependency_links.txt
+[0.402s] writing entry points to build/visualizer/visualizer.egg-info/entry_points.txt
+[0.402s] writing requirements to build/visualizer/visualizer.egg-info/requires.txt
+[0.402s] writing top-level names to build/visualizer/visualizer.egg-info/top_level.txt
+[0.402s] writing manifest file 'build/visualizer/visualizer.egg-info/SOURCES.txt'
+[0.414s] reading manifest file 'build/visualizer/visualizer.egg-info/SOURCES.txt'
+[0.414s] writing manifest file 'build/visualizer/visualizer.egg-info/SOURCES.txt'
+[0.415s] running build
+[0.415s] running build_py
+[0.415s] creating /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] copying visualizer/record.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] copying visualizer/caster_kinematic_estimator.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] copying visualizer/plot.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] copying visualizer/__init__.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] copying visualizer/trajectory_triptych.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] copying visualizer/key_stop_plot.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+[0.415s] running install
+[0.417s] running install_lib
+[0.423s] creating /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/record.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/caster_kinematic_estimator.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/plot.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/__init__.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/trajectory_triptych.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/key_stop_plot.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+[0.423s] byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/record.py to record.cpython-310.pyc
+[0.424s] byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/caster_kinematic_estimator.py to caster_kinematic_estimator.cpython-310.pyc
+[0.425s] byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/plot.py to plot.cpython-310.pyc
+[0.427s] byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/__init__.py to __init__.cpython-310.pyc
+[0.427s] byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/trajectory_triptych.py to trajectory_triptych.cpython-310.pyc
+[0.427s] byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/key_stop_plot.py to key_stop_plot.cpython-310.pyc
+[0.428s] running install_data
+[0.428s] creating /home/lee/ros2_ws/src/visualizer/install/visualizer/share/ament_index/resource_index/packages
+[0.428s] copying resource/visualizer -> /home/lee/ros2_ws/src/visualizer/install/visualizer/share/ament_index/resource_index/packages
+[0.428s] copying package.xml -> /home/lee/ros2_ws/src/visualizer/install/visualizer/share/visualizer
+[0.428s] creating /home/lee/ros2_ws/src/visualizer/install/visualizer/share/visualizer/launch
+[0.428s] copying launch/record_and_plot.launch.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/share/visualizer/launch
+[0.428s] running install_egg_info
+[0.434s] Copying build/visualizer/visualizer.egg-info to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer-0.1.0-py3.10.egg-info
+[0.434s] running install_scripts
+[0.478s] Installing caster_kinematic_estimator_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+[0.478s] Installing key_stop_plot_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+[0.478s] Installing plot_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+[0.478s] Installing record_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+[0.478s] Installing trajectory_triptych script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+[0.478s] writing list of installed files to '/home/lee/ros2_ws/src/visualizer/build/visualizer/install.log'
+[0.490s] Invoked command in '/home/lee/ros2_ws/src/visualizer' returned '0': CONDA_PROMPT_MODIFIER=(ros2) PYTHONPATH=/home/lee/ros2_ws/src/visualizer/build/visualizer/prefix_override:/home/lee/anaconda3/envs/ros2/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages:${PYTHONPATH} /home/lee/anaconda3/envs/ros2/bin/python3.10 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/visualizer build --build-base /home/lee/ros2_ws/src/visualizer/build/visualizer/build install --record /home/lee/ros2_ws/src/visualizer/build/visualizer/install.log --single-version-externally-managed install_data

@@ -1,0 +1,51 @@
+/home/lee/anaconda3/envs/ros2/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+running egg_info
+creating build/visualizer/visualizer.egg-info
+writing build/visualizer/visualizer.egg-info/PKG-INFO
+writing dependency_links to build/visualizer/visualizer.egg-info/dependency_links.txt
+writing entry points to build/visualizer/visualizer.egg-info/entry_points.txt
+writing requirements to build/visualizer/visualizer.egg-info/requires.txt
+writing top-level names to build/visualizer/visualizer.egg-info/top_level.txt
+writing manifest file 'build/visualizer/visualizer.egg-info/SOURCES.txt'
+reading manifest file 'build/visualizer/visualizer.egg-info/SOURCES.txt'
+writing manifest file 'build/visualizer/visualizer.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+copying visualizer/record.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+copying visualizer/caster_kinematic_estimator.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+copying visualizer/plot.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+copying visualizer/__init__.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+copying visualizer/trajectory_triptych.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+copying visualizer/key_stop_plot.py -> /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer
+running install
+running install_lib
+creating /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/record.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/caster_kinematic_estimator.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/plot.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/__init__.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/trajectory_triptych.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+copying /home/lee/ros2_ws/src/visualizer/build/visualizer/build/lib/visualizer/key_stop_plot.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer
+byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/record.py to record.cpython-310.pyc
+byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/caster_kinematic_estimator.py to caster_kinematic_estimator.cpython-310.pyc
+byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/plot.py to plot.cpython-310.pyc
+byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/trajectory_triptych.py to trajectory_triptych.cpython-310.pyc
+byte-compiling /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer/key_stop_plot.py to key_stop_plot.cpython-310.pyc
+running install_data
+creating /home/lee/ros2_ws/src/visualizer/install/visualizer/share/ament_index/resource_index/packages
+copying resource/visualizer -> /home/lee/ros2_ws/src/visualizer/install/visualizer/share/ament_index/resource_index/packages
+copying package.xml -> /home/lee/ros2_ws/src/visualizer/install/visualizer/share/visualizer
+creating /home/lee/ros2_ws/src/visualizer/install/visualizer/share/visualizer/launch
+copying launch/record_and_plot.launch.py -> /home/lee/ros2_ws/src/visualizer/install/visualizer/share/visualizer/launch
+running install_egg_info
+Copying build/visualizer/visualizer.egg-info to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/python3.10/site-packages/visualizer-0.1.0-py3.10.egg-info
+running install_scripts
+Installing caster_kinematic_estimator_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+Installing key_stop_plot_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+Installing plot_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+Installing record_node script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+Installing trajectory_triptych script to /home/lee/ros2_ws/src/visualizer/install/visualizer/lib/visualizer
+writing list of installed files to '/home/lee/ros2_ws/src/visualizer/build/visualizer/install.log'
